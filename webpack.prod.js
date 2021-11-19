@@ -1,13 +1,13 @@
-const HtmlWebPack    = require('html-webpack-plugin');
+const HtmlWebPack = require('html-webpack-plugin');
 const MiniCssExtract = require("mini-css-extract-plugin");
-const CopyPlugin     = require("copy-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
-const CssMinimizer  = require('css-minimizer-webpack-plugin');
-const Teser         = require('terser-webpack-plugin');
+const CssMinimizer = require('css-minimizer-webpack-plugin');
+const Teser = require('terser-webpack-plugin');
 
- 
+
 module.exports = {
- 
+
     mode: 'production',
     output: {
         clean: true,
@@ -36,10 +36,20 @@ module.exports = {
             {
                 test: /\.(png|jpe?g|gif)$/,
                 loader: 'file-loader'
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             }
         ]
     },
-    optimization:{
+    optimization: {
         minimize: true,
         minimizer: [
             new CssMinimizer(),
@@ -47,20 +57,20 @@ module.exports = {
         ]
     },
     plugins: [
-         new HtmlWebPack({
-             title: 'Mi Webpack App',
-             template: 'src/index.html'
-         }),
-         new MiniCssExtract({
+        new HtmlWebPack({
+            title: 'Mi Webpack App',
+            template: 'src/index.html'
+        }),
+        new MiniCssExtract({
             filename: '[name].[fullhash].css', //[fullhash] para crear un hash para que los clientes no tengan cashe del css
             ignoreOrder: false
-         }),
-         new CopyPlugin({
-            patterns:[
-                { from: 'src/asset/', to: 'asset/'}
+        }),
+        new CopyPlugin({
+            patterns: [
+                { from: 'src/asset/', to: 'asset/' }
             ]
-         }),
+        }),
     ]
- 
- 
+
+
 }
