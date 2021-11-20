@@ -24,5 +24,5 @@ npm run build
 
 | Nombre      | Descripcion |Para|
 | ----------- | ----------- | ----------- |
-| **build**| Facil de leer para el desarrollador|Producción
-| **build:dev**| Minimizado y facil de leer para el navegador|Desarrollador
+| **build**| Minimizado y facil de leer para el navegador|Producción
+| **build:dev**| Facil de leer para el desarrollador|Desarrollador
